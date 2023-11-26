@@ -315,17 +315,17 @@ impl core::fmt::Debug for RTC {
 }
 #[doc = "Watchdog"]
 pub mod rtc;
-#[doc = "Always-On Clock Configuration"]
-pub struct AONCLK {
+#[doc = "Always-On (AON) Domain"]
+pub struct AON {
     _marker: PhantomData<*const ()>,
 }
-unsafe impl Send for AONCLK {}
-impl AONCLK {
+unsafe impl Send for AON {}
+impl AON {
     #[doc = r"Pointer to the register block"]
-    pub const PTR: *const aonclk::RegisterBlock = 0x1000_0000 as *const _;
+    pub const PTR: *const aon::RegisterBlock = 0x1000_0000 as *const _;
     #[doc = r"Return the pointer to the register block"]
     #[inline(always)]
-    pub const fn ptr() -> *const aonclk::RegisterBlock {
+    pub const fn ptr() -> *const aon::RegisterBlock {
         Self::PTR
     }
     #[doc = r" Steal an instance of this peripheral"]
@@ -347,20 +347,20 @@ impl AONCLK {
         }
     }
 }
-impl Deref for AONCLK {
-    type Target = aonclk::RegisterBlock;
+impl Deref for AON {
+    type Target = aon::RegisterBlock;
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
         unsafe { &*Self::PTR }
     }
 }
-impl core::fmt::Debug for AONCLK {
+impl core::fmt::Debug for AON {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-        f.debug_struct("AONCLK").finish()
+        f.debug_struct("AON").finish()
     }
 }
-#[doc = "Always-On Clock Configuration"]
-pub mod aonclk;
+#[doc = "Always-On (AON) Domain"]
+pub mod aon;
 #[doc = "Backup Registers"]
 pub struct BACKUP {
     _marker: PhantomData<*const ()>,
@@ -1018,8 +1018,8 @@ pub struct Peripherals {
     pub WDOG: WDOG,
     #[doc = "RTC"]
     pub RTC: RTC,
-    #[doc = "AONCLK"]
-    pub AONCLK: AONCLK,
+    #[doc = "AON"]
+    pub AON: AON,
     #[doc = "BACKUP"]
     pub BACKUP: BACKUP,
     #[doc = "PMU"]
@@ -1082,7 +1082,7 @@ impl Peripherals {
             RTC: RTC {
                 _marker: PhantomData,
             },
-            AONCLK: AONCLK {
+            AON: AON {
                 _marker: PhantomData,
             },
             BACKUP: BACKUP {
